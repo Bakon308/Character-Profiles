@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WTA // Mainframe Terminal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>WHITE TIGER ARCHIVES // INTERNAL DATABASE</h1>
+    <p class="status-bar">SYSTEM STATUS: SECURE // SECURE CORE INTERFACE</p>
+  </header>
+
+  <main>
+    <section class="terminal-card">
+      <h2>[INITIALIZE COGNITIVE RECORD]</h2>
+      <form id="new-profile-form">
+        <div class="form-grid">
+          <label>Subject Name: <input type="text" id="form-name" required></label>
+          <label>Alias/Title: <input type="text" id="form-alias"></label>
+          <label>Age: <input type="number" id="form-age" required></label>
+          <label>Date of Birth: <input type="text" id="form-birthday" required></label>
+        </div>
+        <div class="form-grid">
+          <label>Operational Status:
+            <select id="form-status" required>
+              <option value="Active">Active</option>
+              <option value="MIA">MIA</option>
+              <option value="Deceased">Deceased</option>
+              <option value="Under Surveillance" selected>Under Surveillance</option>
+            </select>
+          </label>
+          <label>Classification: <input type="text" id="form-threat" placeholder="e.g. White Ring, Bronze Ring, Silver Ring, Gold Ring" required></label>
+          <label>Assigned Division: <input type="text" id="form-affiliation" required></label>
+        </div>
+        <div class="form-grid">
+          <label style="grid-column: span 3;">Behaviors (Comma separated): 
+            <input type="text" id="form-tags" placeholder="e.g. Volatile, Tactical, High-Intelligence">
+          </label>
+        </div>
+        <label>Initial Narrative Field Report:</label>
+        <textarea id="form-files" rows="3" placeholder="Enter standard behavioral observations..." required></textarea>
+        <button type="submit" class="btn-terminal">ENGAGE RECORD ARCHIVE</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>[CLASSIFIED ARCHIVE DIRECTORY]</h2>
+      <div id="directory-grid" class="grid-container"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      displayDirectory();
+      
+      document.getElementById('new-profile-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const rawTags = document.getElementById('form-tags').value;
+        const processedTags = rawTags.split(',').map(t => t.trim()).filter(t => t !== "");
+
+        // Build object out of default schema
+        const blank = getBlankTemplate();
+        const filledData = {
+          ...blank,
+          name: document.getElementById('form-name').value,
+          alias: document.getElementById('form-alias').value,
+          age: parseInt(document.getElementById('form-age').value),
+          birthday: document.getElementById('form-birthday').value,
+          status: document.getElementById('form-status').value,
+          threatLevel: document.getElementById('form-threat').value,
+          affiliation: document.getElementById('form-affiliation').value,
+          tags: processedTags,
+          caseFiles: document.getElementById('form-files').value
+        };
+
+        createCharacterProfile(filledData);
+        e.target.reset();
+        displayDirectory();
+      });
+    });
+  </script>
+</body>
+</html>

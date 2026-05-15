@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WTA // Secure Dossier</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>WTA INTERNAL TERMINAL // SYSTEM ID: <span id="hdr-id">-</span></h1>
+    <a href="index.html" class="btn-terminal">< RETURN TO MAINFRAME</a>
+  </header>
+
+  <div class="dossier-layout">
+    <aside class="sidebar-tabs">
+      <button class="tab-btn active" onclick="switchTab('tab-basics')">01 // IDENTITY BASICS</button>
+      <button class="tab-btn" onclick="switchTab('tab-biometrics')">02 // BIOMETRIC PROFILES</button>
+      <button class="tab-btn" onclick="switchTab('tab-psyche')">03 // PSYCHOLOGICAL ALIGNMENT</button>
+      <button class="tab-btn" onclick="switchTab('tab-medical')">04 // HEALTH & HISTORY</button>
+      <button class="tab-btn" onclick="switchTab('tab-tactical')">05 // TACTICAL ANOMALIES</button>
+      <button class="tab-btn" onclick="switchTab('tab-records')">06 // EMPLOYMENT & RECORDS</button>
+      <button class="tab-btn" onclick="switchTab('tab-fieldnotes')">07 // FIELD OFFICER LOGS</button>
+    </aside>
+
+    <main class="terminal-card dynamic-content-box">
+      
+      <div class="dossier-header">
+        <h2>SUBJECT: <span id="view-title-name">-</span> <span id="view-title-alias"></span></h2>
+        <span id="view-status" class="badge">UNKNOWN</span>
+      </div>
+      <hr style="margin-bottom: 25px;">
+
+      <div id="tab-basics" class="tab-panel">
+        <div class="view-block">
+          <h3>[REGISTRATION PARAMETERS]</h3>
+          <div class="meta-grid">
+            <p><strong>TRUE IDENTITY:</strong> <span id="v-name">-</span></p>
+            <p><strong>OPERATIONAL ALIAS:</strong> <span id="v-alias">-</span></p>
+            <p><strong>CHRONOLOGICAL AGE:</strong> <span id="v-age">-</span></p>
+            <p><strong>DATE OF BIRTH:</strong> <span id="v-birthday">-</span></p>
+            <p><strong>NATIVE ORIGIN HUB:</strong> <span id="v-pob">-</span></p>
+            <p><strong>CURRENT ANCHOR VECTOR:</strong> <span id="v-residence">-</span></p>
+            <p><strong>THREAT MATRIX:</strong> <span id="v-threat">-</span></p>
+            <p><strong>TACTICAL UNIT:</strong> <span id="v-affiliation">-</span></p>
+          </div>
+          <h3>[COGNITIVE CLASSIFICATION CODES]</h3>
+          <div id="view-tags" class="tags-container"></div>
+          <button class="btn-terminal warning lock-trigger">OVERRIDE BASICS LOCK</button>
+        </div>
+        
+        <form class="edit-block hidden">
+          <h3>[MODIFING IDENTITY CONSTANTS]</h3>
+          <div class="form-grid">
+            <label>Name: <input type="text" id="e-name"></label>
+            <label>Alias: <input type="text" id="e-alias"></label>
+            <label>Age: <input type="number" id="e-age"></label>
+            <label>DOB: <input type="text" id="e-birthday"></label>
+          </div>
+          <div class="form-grid">
+            <label>Status:
+              <select id="e-status">
+                <option value="Active">Active</option>
+                <option value="MIA">MIA</option>
+                <option value="Deceased">Deceased</option>
+                <option value="Under Surveillance">Under Surveillance</option>
+              </select>
+            </label>
+            <label>Threat Level: <input type="text" id="e-threat"></label>
+            <label>Division Node: <input type="text" id="e-affiliation"></label>
+            <label>Birthplace Node: <input type="text" id="e-pob"></label>
+          </div>
+          <div class="form-grid">
+            <label style="grid-column: span 2;">Current Residence Anchor: <input type="text" id="e-residence"></label>
+            <label style="grid-column: span 2;">System Core Tags (comma-separated): <input type="text" id="e-tags"></label>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn-terminal success">COMMIT UPGRADES</button>
+            <button type="button" class="btn-terminal structural abort-trigger">ABORT OVERRIDE</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="tab-biometrics" class="tab-panel hidden">
+        <div class="view-block">
+          <h3>[BIOMETRICS SIGNATURE LOGS]</h3>
+          <div class="meta-grid">
+            <p><strong>HEIGHT SCALE:</strong> <span id="v-height">-</span></p>
+            <p><strong>MASS INDEX:</strong> <span id="v-weight">-</span></p>
+            <p><strong>MORPHOLOGY:</strong> <span id="v-build">-</span></p>
+            <p><strong>OCULAR HUE:</strong> <span id="v-eye">-</span></p>
+            <p><strong>PIGMENTATION INDEX:</strong> <span id="v-skin">-</span></p>
+            <p><strong>HAIR CONFIGURATION:</strong> <span id="v-hair">-</span></p>
+          </div>
+          <p><strong>SCAR TISSUE MANIFESTATIONS:</strong></p>
+          <div class="case-notes-block" id="v-scars">-</div>
+          <p><strong>DISTINGUISHING GENETIC MARKS:</strong></p>
+          <div class="case-notes-block" id="v-marks">-</div>
+          <button class="btn-terminal warning lock-trigger">OVERRIDE BIOMETRIC LOCK</button>
+        </div>
+
+        <form class="edit-block hidden">
+          <h3>[MODIFYING BIOMETRIC INDEXES]</h3>
+          <div class="form-grid">
+            <label>Height: <input type="text" id="e-height"></label>
+            <label>Weight: <input type="text" id="e-weight"></label>
+            <label>Build Variant: <input type="text" id="e-build"></label>
+            <label>Ocular Code: <input type="text" id="e-eye"></label>
+            <label>Skin Tone Code: <input type="text" id="e-skin"></label>
+            <label>Hair Style Array: <input type="text" id="e-hair"></label>
+          </div>
+          <div class="form-grid">
+            <label style="grid-column: span 2;">Dermal Scars Matrix: <textarea id="e-scars" rows="3"></textarea></label>
+            <label style="grid-column: span 2;">Genetic Distinguishing Marks: <textarea id="e-marks" rows="3"></textarea></label>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn-terminal success">COMMIT UPGRADES</button>
+            <button type="button" class="btn-terminal structural abort-trigger">ABORT OVERRIDE</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="tab-psyche" class="tab-panel hidden">
+        <div class="view-block">
+          <h3>[PSYCHE PROFILES MATRIX]</h3>
+          <div class="meta-grid">
+            <p><strong>MBTI ASSESSMENT:</strong> <span id="v-mbti">-</span></p>
+            <p><strong>MORAL CODE COMPASS:</strong> <span id="v-alignment">-</span></p>
+          </div>
+          <p><strong>DOMINANT SYSTEMIC FEARS:</strong></p>
+          <div class="case-notes-block" id="v-fears">-</div>
+          <p><strong>CORE MOTIVATIONS / OBJECTIVES:</strong></p>
+          <div class="case-notes-block" id="v-goals">-</div>
+          <p><strong>GENERAL OBSERVED ATTITUDE:</strong></p>
+          <div class="case-notes-block" id="v-attitude">-</div>
+          <p><strong>DETAILED PSYCHOLOGICAL DOSSIER:</strong></p>
+          <div class="case-notes-block" id="v-psychedesc">-</div>
+          <button class="btn-terminal warning lock-trigger">OVERRIDE PSYCHE LOCK</button>
+        </div>
+
+        <form class="edit-block hidden">
+          <h3>[MODIFYING PSYCHOLOGICAL VECTORS]</h3>
+          <div class="form-grid">
+            <label>MBTI Data Matrix: <input type="text" id="e-mbti"></label>
+            <label>Alignment Standard: <input type="text" id="e-alignment"></label>
+          </div>
+          <div class="form-grid">
+            <label style="grid-column: span 2;">Core Tracked Fears: <textarea id="e-fears" rows="2"></textarea></label>
+            <label style="grid-column: span 2;">Life Target Commitments / Goals: <textarea id="e-goals" rows="2"></textarea></label>
+          </div>
+          <label>Observed Behavioral Stance:</label>
+          <textarea id="e-attitude" rows="2" style="width:100%; box-sizing:border-box; margin-bottom:15px;"></textarea>
+          <label>Comprehensive Personality Breakdown Log:</label>
+          <textarea id="e-psychedesc" rows="4" style="width:100%; box-sizing:border-box; margin-bottom:15px;"></textarea>
+          <div class="form-actions">
+            <button type="submit" class="btn-terminal success">COMMIT UPGRADES</button>
+            <button type="button" class="btn-terminal structural abort-trigger">ABORT OVERRIDE</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="tab-medical" class="tab-panel hidden">
+        <div class="view-block">
+          <h3>[BIOLOGICAL DEGRADATION CONTROLS]</h3>
+          <div class="meta-grid">
+            <p><strong>CHRONIC ILLNESSES:</strong> <span id="v-illnesses">-</span></p>
+            <p><strong>ALLERGEN SUSCEPTIBILITIES:</strong> <span id="v-allergies">-</span></p>
+            <p><strong>PSYCHOSOMATIC RECOGNITIONS:</strong> <span id="v-mental">-</span></p>
+          </div>
+          <p><strong>UNHEALTHY PATHOLOGICAL BEHAVIORS:</strong></p>
+          <div class="case-notes-block" id="v-habits">-</div>
+          <h3>[LINEAGE DATA SECTOR]</h3>
+          <p><strong>FAMILY TREE MATRIX / BLOODLINE NOTES:</strong></p>
+          <div class="case-notes-block" id="v-family">-</div>
+          <p><strong>RELATIONSHIP MATRIX SUMMARY:</strong></p>
+          <div class="case-notes-block" id="v-relationships">-</div>
+          <button class="btn-terminal warning lock-trigger">OVERRIDE MEDICAL LOCK</button>
+        </div>
+
+        <form class="edit-block hidden">
+          <h3>[MODIFYING PATHOLOGICAL & LINEAGE SIGNATURES]</h3>
+          <div class="form-grid">
+            <label>Physical Illnesses: <input type="text" id="e-illnesses"></label>
+            <label>Allergen Sensitivities: <input type="text" id="e-allergies"></label>
+            <label>Mental Pathologies: <input type="text" id="e-mental"></label>
+          </div>
+          <label>Unhealthy/Addictive Behaviors Tracker:</label>
+          <textarea id="e-habits" rows="2" style="width:100%; box-sizing:border-box; margin-bottom:15px;"></textarea>
+          <div class="form-grid">
+            <label style="grid-column: span 2;">Bloodline Lineage Records: <textarea id="e-family" rows="3"></textarea></label>
+            <label style="grid-column: span 2;">Target Contact Relationship Records: <textarea id="e-relationships" rows="3"></textarea></label>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn-terminal success">COMMIT UPGRADES</button>
+            <button type="button" class="btn-terminal structural abort-trigger">ABORT OVERRIDE</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="tab-tactical" class="tab-panel hidden">
+        <div class="view-block">
+          <h3>[TACTICAL ENGAGEMENT CAPABILITIES]</h3>
+          <div class="meta-grid">
+            <p><strong>ANOMALOUS CAPACITY MAPPING:</strong> <span id="v-powername">-</span></p>
+            <p><strong>ANOMALY MATRIX ORIGIN:</strong> <span id="v-powerorigin">-</span></p>
+          </div>
+          <p><strong>CAPACITY DRAWBACKS / CELLULAR TOLL:</strong></p>
+          <div class="case-notes-block" id="v-powerdraw">-</div>
+          <p><strong>CLOSE-QUARTERS COMBAT EFFICIENCY:</strong></p>
+          <div class="case-notes-block" id="v-combat">-</div>
+          <p><strong>PERSONAL ARSENAL / DEFENSIVE PARAPHERNALIA:</strong></p>
+          <div class="case-notes-block" id="v-weapons">-</div>
+          <button class="btn-terminal warning lock-trigger">OVERRIDE TACTICAL LOCK</button>
+        </div>
+
+        <form class="edit-block hidden">
+          <h3>[MODIFYING TACTICAL CAPABILITIES LOGS]</h3>
+          <div class="form-grid">
+            <label>Anomalous Class Designation: <input type="text" id="e-powername"></label>
+            <label>Power Manifest Vector Origin: <input type="text" id="e-powerorigin"></label>
+          </div>
+          <label>Anomalous Operational Cost / Feedback Limits:</label>
+          <textarea id="e-powerdraw" rows="2" style="width:100%; box-sizing:border-box; margin-bottom:15px;"></textarea>
+          <label>Close-Quarters Combat Skill Rating Matrix:</label>
+          <textarea id="e-combat" rows="2" style="width:100%; box-sizing:border-box; margin-bottom:15px;"></textarea>
+          <label>Tracked Armaments / Hardware Profile Configuration:</label>
+          <textarea id="e-weapons" rows="2" style="width:100%; box-sizing:border-box; margin-bottom:15px;"></textarea>
+          <div class="form-actions">
+            <button type="submit" class="btn-terminal success">COMMIT UPGRADES</button>
+            <button type="button" class="btn-terminal structural abort-trigger">ABORT OVERRIDE</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="tab-records" class="tab-panel hidden">
+        <div class="view-block">
+          <h3>[EMPLOYMENT LOGS & FISCAL SECTOR]</h3>
+          <div class="meta-grid">
+            <p><strong>CURRENT OCCUPATIONAL PATH:</strong> <span id="v-job">-</span></p>
+            <p><strong>CONTRACTED EMPLOYER NODE:</strong> <span id="v-employer">-</span></p>
+            <p><strong>LIQUID INCOME FLOW:</strong> <span id="v-income">-</span></p>
+            <p><strong>TOTAL TRACKED ASSET CAPITAL:</strong> <span id="v-networth">-</span></p>
+          </div>
+          <h3>[CRIMINAL CONVICTION ARCHIVES]</h3>
+          <div class="meta-grid">
+            <p><strong>CHARGED OFFENSE:</strong> <span id="v-crime">-</span></p>
+            <p><strong>TRIBUNAL VERDICT:</strong> <span id="v-verdict">-</span></p>
+            <p><strong>CURRENT SENTENCE EXECUTED STATUS:</strong> <span id="v-crimestatus">-</span></p>
+          </div>
+          <button class="btn-terminal warning lock-trigger">OVERRIDE RECORDS LOCK</button>
+        </div>
+
+        <form class="edit-block hidden">
+          <h3>[MODIFYING BUREAUCRATIC LOGS]</h3>
+          <div class="form-grid">
+            <label>Job Title: <input type="text" id="e-job"></label>
+            <label>Employer Node: <input type="text" id="e-employer"></label>
+            <label>Income Matrix: <input type="text" id="e-income"></label>
+            <label>Tracked Net Asset Capital Value: <input type="text" id="e-networth"></label>
+          </div>
+          <div class="form-grid">
+            <label>Criminal Activity Charges Logged: <input type="text" id="e-crime"></label>
+            <label>Court Verdict Status: <input type="text" id="e-verdict"></label>
+            <label>Penal Enforcement Execution Status: <input type="text" id="e-crimestatus"></label>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn-terminal success">COMMIT UPGRADES</button>
+            <button type="button" class="btn-terminal structural abort-trigger">ABORT OVERRIDE</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="tab-fieldnotes" class="tab-panel hidden">
+        <div class="view-block">
+          <h3>[WTA FIELD OFFICER ANALYSIS LOG]</h3>
+          <div id="view-files" class="case-notes-block">No records logged.</div>
+          <button class="btn-terminal warning lock-trigger">OVERRIDE CASE REPORT LOCK</button>
+        </div>
+
+        <form class="edit-block hidden">
+          <h3>[MODIFYING FIELD INTELLIGENCE LOG]</h3>
+          <label>Field Officer Analysis Report Text Block:</label>
+          <textarea id="e-files" rows="8" style="width:100%; box-sizing:border-box; margin-bottom:15px; font-family:inherit; color:inherit; background-color:rgba(0,0,0,0.3);"></textarea>
+          <div class="form-actions">
+            <button type="submit" class="btn-terminal success">COMMIT UPGRADES</button>
+            <button type="button" class="btn-terminal structural abort-trigger">ABORT OVERRIDE</button>
+          </div>
+        </form>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    let currentId = "";
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-panel').forEach(panel => {
+        panel.classList.add('hidden');
+        // Reset any tab currently locked into edit mode back to view mode on tab switch
+        panel.querySelector('.view-block').classList.remove('hidden');
+        panel.querySelector('.edit-block').classList.add('hidden');
+      });
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      
+      document.getElementById(tabId).classList.remove('hidden');
+      event.currentTarget.classList.add('active');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      currentId = urlParams.get('id');
+
+      if (!currentId) {
+        alert("CRITICAL CORE HALT: Trace Vector Missing ID.");
+        window.location.href = 'index.html';
+        return;
+      }
+
+      document.getElementById('hdr-id').textContent = currentId;
+
+      // --- DEPLOY INDIVIDUAL MEMORY LOCK HOOKS ---
+      document.querySelectorAll('.tab-panel').forEach(panel => {
+        const viewBlock = panel.querySelector('.view-block');
+        const editBlock = panel.querySelector('.edit-block');
+        const lockBtn = panel.querySelector('.lock-trigger');
+        const abortBtn = panel.querySelector('.abort-trigger');
+
+        // Unlock memory block
+        lockBtn.addEventListener('click', () => {
+          viewBlock.classList.add('hidden');
+          editBlock.classList.remove('hidden');
+        });
+
+        // Abort override operation
+        abortBtn.addEventListener('click', () => {
+          editBlock.classList.add('hidden');
+          viewBlock.classList.remove('hidden');
+        });
+
+        // Handle structural single-tab data submission
+        editBlock.addEventListener('submit', (e) => {
+          e.preventDefault();
+          
+          // Map tags from basic tab cleanly if present
+          let tagsArr = [];
+          const tagsInput = document.getElementById('e-tags');
+          if(tagsInput) {
+            tagsArr = tagsInput.value.split(',').map(t => t.trim()).filter(t => t !== "");
+          }
+
+          const updatedData = {
+            name: document.getElementById('e-name').value,
+            alias: document.getElementById('e-alias').value,
+            age: parseInt(document.getElementById('e-age').value) || "",
+            birthday: document.getElementById('e-birthday').value,
+            status: document.getElementById('e-status').value,
+            threatLevel: document.getElementById('e-threat').value,
+            affiliation: document.getElementById('e-affiliation').value,
+            placeOfBirth: document.getElementById('e-pob').value,
+            currentResidence: document.getElementById('e-residence').value,
+            tags: tagsInput ? tagsArr : getCharacterById(currentId).tags, // Keep tag context safe
+            
+            height: document.getElementById('e-height').value,
+            weight: document.getElementById('e-weight').value,
+            bodyBuild: document.getElementById('e-build').value,
+            eyeColor: document.getElementById('e-eye').value,
+            skinColor: document.getElementById('e-skin').value,
+            hairColor: document.getElementById('e-hair').value,
+            scars: document.getElementById('e-scars').value,
+            distinguishingMarks: document.getElementById('e-marks').value,
+            
+            mbti: document.getElementById('e-mbti').value,
+            moralAlignment: document.getElementById('e-alignment').value,
+            fears: document.getElementById('e-fears').value,
+            personalGoals: document.getElementById('e-goals').value,
+            generalAttitude: document.getElementById('e-attitude').value,
+            personalityDesc: document.getElementById('e-psychedesc').value,
+            
+            illnesses: document.getElementById('e-illnesses').value,
+            allergies: document.getElementById('e-allergies').value,
+            mentalIllnesses: document.getElementById('e-mental').value,
+            unhealthyHabits: document.getElementById('e-habits').value,
+            familyHistory: document.getElementById('e-family').value,
+            relationshipNotes: document.getElementById('e-relationships').value,
+            
+            powersName: document.getElementById('e-powername').value,
+            powersOrigin: document.getElementById('e-powerorigin').value,
+            powersDrawbacks: document.getElementById('e-powerdraw').value,
+            combatCapabilities: document.getElementById('e-combat').value,
+            weaponsParaphernalia: document.getElementById('e-weapons').value,
+            
+            jobTitle: document.getElementById('e-job').value,
+            employer: document.getElementById('e-employer').value,
+            income: document.getElementById('e-income').value,
+            netWorth: document.getElementById('e-networth').value,
+            criminalRecordCrime: document.getElementById('e-crime').value,
+            criminalRecordVerdict: document.getElementById('e-verdict').value,
+            criminalRecordStatus: document.getElementById('e-crimestatus').value,
+            
+            caseFiles: document.getElementById('e-files').value
+          };
+
+          updateCharacterProfile(currentId, updatedData);
+          loadDossier(); // Re-render updated data immediately to UI inputs
+          
+          editBlock.classList.add('hidden');
+          viewBlock.classList.remove('hidden');
+        });
+      });
+
+      // Populate text mappings to fields safely
+      function loadDossier() {
+        const char = getCharacterById(currentId);
+        if (!char) {
+          alert("DATABASE CONFLICT: Dossier Block Purged.");
+          window.location.href = 'index.html';
+          return;
+        }
+
+        document.getElementById('view-title-name').textContent = char.name || "UNIDENTIFIED";
+        document.getElementById('view-title-alias').textContent = char.alias ? `// [${char.alias.toUpperCase()}]` : "";
+        document.getElementById('v-name').textContent = char.name || "-";
+        document.getElementById('v-alias').textContent = char.alias || "-";
+        document.getElementById('v-age').textContent = char.age || "-";
+        document.getElementById('v-birthday').textContent = char.birthday || "-";
+        document.getElementById('v-pob').textContent = char.placeOfBirth || "-";
+        document.getElementById('v-residence').textContent = char.currentResidence || "-";
+        document.getElementById('v-threat').textContent = char.threatLevel || "-";
+        document.getElementById('v-affiliation').textContent = char.affiliation || "-";
+        
+        document.getElementById('v-height').textContent = char.height || "-";
+        document.getElementById('v-weight').textContent = char.weight || "-";
+        document.getElementById('v-build').textContent = char.bodyBuild || "-";
+        document.getElementById('v-eye').textContent = char.eyeColor || "-";
+        document.getElementById('v-skin').textContent = char.skinColor || "-";
+        document.getElementById('v-hair').textContent = char.hairColor || "-";
+        document.getElementById('v-scars').textContent = char.scars || "[NO DETECTED SURFACES]";
+        document.getElementById('v-marks').textContent = char.distinguishingMarks || "[NO ABERRATIONS LOGGED]";
+
+        document.getElementById('v-mbti').textContent = char.mbti || "-";
+        document.getElementById('v-alignment').textContent = char.moralAlignment || "-";
+        document.getElementById('v-fears').textContent = char.fears || "[NO COGNITIVE DISRUPTION TRACED]";
+        document.getElementById('v-goals').textContent = char.personalGoals || "[NONE ASSIGNED]";
+        document.getElementById('v-attitude').textContent = char.generalAttitude || "-";
+        document.getElementById('v-psychedesc').textContent = char.personalityDesc || "[NO ANCHOR NARRATIVE RECORDED]";
+
+        document.getElementById('v-illnesses').textContent = char.illnesses || "-";
+        document.getElementById('v-allergies').textContent = char.allergies || "-";
+        document.getElementById('v-mental').textContent = char.mentalIllnesses || "-";
+        document.getElementById('v-habits').textContent = char.unhealthyHabits || "[STABLE DATA SIGNATURE]";
+        document.getElementById('v-family').textContent = char.familyHistory || "[UNTRACKED CLAN ORIGINS]";
+        document.getElementById('v-relationships').textContent = char.relationshipNotes || "[NO DIRECT AFFILIATIONS DETECTED]";
+
+        document.getElementById('v-powername').textContent = char.powersName || "-";
+        document.getElementById('v-powerorigin').textContent = char.powersOrigin || "-";
+        document.getElementById('v-powerdraw').textContent = char.powersDrawbacks || "[STABLE ZERO ENGINE TOLL]";
+        document.getElementById('v-combat').textContent = char.combatCapabilities || "-";
+        document.getElementById('v-weapons').textContent = char.weaponsParaphernalia || "-";
+
+        document.getElementById('v-job').textContent = char.jobTitle || "-";
+        document.getElementById('v-employer').textContent = char.employer || "-";
+        document.getElementById('v-income').textContent = char.income || "-";
+        document.getElementById('v-networth').textContent = char.netWorth || "-";
+        document.getElementById('v-crime').textContent = char.criminalRecordCrime || "[CLEAN LOG VECTOR]";
+        document.getElementById('v-verdict').textContent = char.criminalRecordVerdict || "-";
+        document.getElementById('v-crimestatus').textContent = char.criminalRecordStatus || "-";
+
+        document.getElementById('view-files').textContent = char.caseFiles || "No notes captured.";
+
+        const statusBadge = document.getElementById('view-status');
+        statusBadge.textContent = (char.status || "UNKNOWN").toUpperCase();
+        statusBadge.className = `badge status-${(char.status || "active").toLowerCase().replace(/\s+/g, '-')}`;
+
+        const tDiv = document.getElementById('view-tags');
+        tDiv.innerHTML = '';
+        if (char.tags) {
+          char.tags.forEach(t => {
+            const span = document.createElement('span');
+            span.className = 'tag';
+            span.textContent = t;
+            tDiv.appendChild(span);
+          });
+        }
+
+        // Keep form input text exactly synced to state
+        document.getElementById('e-name').value = char.name || "";
+        document.getElementById('e-alias').value = char.alias || "";
+        document.getElementById('e-age').value = char.age || "";
+        document.getElementById('e-birthday').value = char.birthday || "";
+        document.getElementById('e-status').value = char.status || "Under Surveillance";
+        document.getElementById('e-threat').value = char.threatLevel || "";
+        document.getElementById('e-affiliation').value = char.affiliation || "";
+        document.getElementById('e-pob').value = char.placeOfBirth || "";
+        document.getElementById('e-residence').value = char.currentResidence || "";
+        if(document.getElementById('e-tags')) document.getElementById('e-tags').value = char.tags ? char.tags.join(', ') : "";
+
+        document.getElementById('e-height').value = char.height || "";
+        document.getElementById('e-weight').value = char.weight || "";
+        document.getElementById('e-build').value = char.bodyBuild || "";
+        document.getElementById('e-eye').value = char.eyeColor || "";
+        document.getElementById('e-skin').value = char.skinColor || "";
+        document.getElementById('e-hair').value = char.hairColor || "";
+        document.getElementById('e-scars').value = char.scars || "";
+        document.getElementById('e-marks').value = char.distinguishingMarks || "";
+
+        document.getElementById('e-mbti').value = char.mbti || "";
+        document.getElementById('e-alignment').value = char.moralAlignment || "";
+        document.getElementById('e-fears').value = char.fears || "";
+        document.getElementById('e-goals').value = char.personalGoals || "";
+        document.getElementById('e-attitude').value = char.generalAttitude || "";
+        document.getElementById('e-psychedesc').value = char.personalityDesc || "";
+
+        document.getElementById('e-illnesses').value = char.illnesses || "";
+        document.getElementById('e-allergies').value = char.allergies || "";
+        document.getElementById('e-mental').value = char.mentalIllnesses || "";
+        document.getElementById('e-habits').value = char.unhealthyHabits || "";
+        document.getElementById('e-family').value = char.familyHistory || "";
+        document.getElementById('e-relationships').value = char.relationshipNotes || "";
+
+        document.getElementById('e-powername').value = char.powersName || "";
+        document.getElementById('e-powerorigin').value = char.powersOrigin || "";
+        document.getElementById('e-powerdraw').value = char.powersDrawbacks || "";
+        document.getElementById('e-combat').value = char.combatCapabilities || "";
+        document.getElementById('e-weapons').value = char.weaponsParaphernalia || "";
+
+        document.getElementById('e-job').value = char.jobTitle || "";
+        document.getElementById('e-employer').value = char.employer || "";
+        document.getElementById('e-income').value = char.income || "";
+        document.getElementById('e-networth').value = char.netWorth || "";
+        document.getElementById('e-crime').value = char.criminalRecordCrime || "";
+        document.getElementById('e-verdict').value = char.criminalRecordVerdict || "";
+        document.getElementById('e-crimestatus').value = char.criminalRecordStatus || "";
+
+        document.getElementById('e-files').value = char.caseFiles || "";
+      }
+
+      loadDossier();
+    });
+  </script>
+</body>
+</html>
