@@ -13,37 +13,32 @@
   </header>
 
   <main>
-    <section class="terminal-card">
-      <h2>[INITIALIZE COGNITIVE RECORD]</h2>
-      <form id="new-profile-form">
-        <div class="form-grid">
-          <label>Subject Name: <input type="text" id="form-name" required></label>
-          <label>Alias/Title: <input type="text" id="form-alias"></label>
-          <label>Age: <input type="number" id="form-age" required></label>
-          <label>Date of Birth: <input type="text" id="form-birthday" required></label>
-        </div>
-        <div class="form-grid">
-          <label>Operational Status:
-            <select id="form-status" required>
-              <option value="Active">Active</option>
-              <option value="MIA">MIA</option>
-              <option value="Deceased">Deceased</option>
-              <option value="Under Surveillance" selected>Under Surveillance</option>
-            </select>
-          </label>
-          <label>Classification: <input type="text" id="form-threat" placeholder="e.g. White Ring, Bronze Ring, Silver Ring, Gold Ring" required></label>
-          <label>Assigned Division: <input type="text" id="form-affiliation" required></label>
-        </div>
-        <div class="form-grid">
-          <label style="grid-column: span 3;">Behaviors (Comma separated): 
-            <input type="text" id="form-tags" placeholder="e.g. Volatile, Tactical, High-Intelligence">
-          </label>
-        </div>
-        <label>Initial Narrative Field Report:</label>
-        <textarea id="form-files" rows="3" placeholder="Enter standard behavioral observations..." required></textarea>
-        <button type="submit" class="btn-terminal">ENGAGE RECORD ARCHIVE</button>
-      </form>
+    <section class="terminal-card" style="border-color: var(--neon-blue); position: relative;">
+      <h2>[ARCHIVE DATA DECRYPTION PORTAL]</h2>
+      <p class="status-bar" style="color: var(--text-main);">INPUT DECRYPTED LOGISTIC DATA PACKETS TO RECONSTRUCT DOSSIERS:</p>
+      
+      <div style="display: flex; gap: 15px; margin-top: 15px;">
+        <label class="btn-terminal success" style="display: inline-block; cursor: pointer; margin-top: 0;">
+          LOAD UNLOCKED DATA PACKET (.JSON)
+          <input type="file" id="import-file" accept=".json" style="display: none;" onchange="importDatabase(this)">
+        </label>
+        <button onclick="exportDatabase()" class="btn-terminal" style="border-color: #555; color: #888;">GENERATE COMPRESSED CORE (EXPORT)</button>
+      </div>
     </section>
+
+    <div id="decryption-overlay" class="hidden" style="position: fixed; top:0; left:0; width:100vw; height:100vh; background-color: rgba(7,9,14,0.98); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: inherit;">
+      <div style="width: 500px; border: 1px solid var(--neon-blue); padding: 30px; background-color: var(--panel-bg); box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);">
+        <h2 style="color: var(--neon-blue); margin-bottom: 5px;" id="matrix-header">INITIALIZING DECRYPTION SEQUENCE...</h2>
+        <div class="status-bar" id="matrix-sub">READING RAW INTERFERENCE PACKETS</div>
+        
+        <div id="matrix-log" style="height: 150px; background-color: #030406; border: 1px solid var(--border-color); margin: 20px 0; padding: 10px; font-size: 0.8rem; overflow: hidden; color: #507080; line-height: 1.4;">
+          </div>
+        
+        <div style="width: 100%; height: 4px; background-color: var(--border-color); position: relative;">
+          <div id="matrix-progress" style="width: 0%; height: 100%; background-color: var(--neon-blue); transition: width 0.1s linear;"></div>
+        </div>
+      </div>
+    </div>
 
     <section>
       <h2>[CLASSIFIED ARCHIVE DIRECTORY]</h2>
