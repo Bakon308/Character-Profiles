@@ -2,7 +2,7 @@
 // White Tiger Archives — Data Engine
 // Pre-seeded with Grimoria character dossiers (story canon, Chapters 1–47)
 // ─────────────────────────────────────────────────────────────────────────────
-
+localStorage.clear()
 const SEED_KEY   = 'wta_seeded_v1';
 const STORE_KEY  = 'wta_characters';
 
